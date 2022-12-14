@@ -1,13 +1,14 @@
 
-import {Button} from 'antd'
-// import 'antd/dist/antd.css'
+
+import {Outlet,Link} from 'react-router-dom'
 
 function App() {
 
   return (
     <div className="App">
-      <Button type='primary'>测试</Button>
-      顶级组件
+      <Link to="/home">Home</Link>
+      <Link to ="/about">About</Link>
+      <Outlet/>
     </div>
   )
 }
