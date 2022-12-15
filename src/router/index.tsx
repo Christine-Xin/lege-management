@@ -1,23 +1,30 @@
-import App from '../App'
+/**路由表式路由 */
 import Home from '../views/Home'
-import About from '../views/About'
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
+// import About from '../views/About'
+import {Navigate} from 'react-router-dom'
+// 路由懒加载
+import React,{lazy} from 'react'
+const About = lazy(()=>import("../views/About"))
 
-// const baseRouter=()=>{
-//     return (
-
-//     )
-// }
-// 当箭头函数没有逻辑时，直接返回（）；当有逻辑时需要返回return()形式，并在return上方写逻辑
-
-const baseRouter=()=>(
-    <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<App/>}>
-                <Route path='/home' element={<Home/>}></Route>
-                <Route path='/about' element={<About/>}></Route>
-            </Route>
-        </Routes>
-    </BrowserRouter>
+const withLoadingComponent=(comp:JSX.Element)=>(
+    <React.Suspense fallback={<div>Loading...</div>}>
+            {comp}
+        </React.Suspense>
 )
+
+const baseRouter=[
+    {
+        path:'/',
+        element:<Navigate to="/home"/>
+    },
+    {
+        path:"/home",
+        element:<Home/>
+    },
+    {
+        path:"/about",
+        // element:<About/>
+        element:withLoadingComponent(<About/>)
+    }
+]
 export default baseRouter
