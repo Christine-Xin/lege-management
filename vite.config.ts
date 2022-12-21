@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
-import styleImport,{AntdResolve} from 'vite-plugin-style-import'
+import styleImport,{VantResolve} from 'vite-plugin-style-import'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,7 +9,14 @@ export default defineConfig({
     react(),
     styleImport({
       resolves:[
-        AntdResolve()
+        VantResolve()
+      ],
+      libs: [
+        {
+          libraryName: 'vant',
+          esModule: true,
+          resolveStyle: name => `../es/${name}/style`
+        }
       ]
     })
   ],
