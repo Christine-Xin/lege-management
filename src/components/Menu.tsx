@@ -1,4 +1,4 @@
-import {useNavigate,Outlet} from 'react-router-dom'
+import {useNavigate,Outlet,useLocation} from 'react-router-dom'
 import {Menu} from 'antd'
 import {theme} from 'antd'
 import type {MenuProps} from 'antd'
@@ -24,12 +24,12 @@ function getItem(
 }
 // items是一个MenuItem类型的数组
 const items:MenuItem[]=[
-    getItem('Option 1', 'page1', <PieChartOutlined />),
-    getItem('Option 2', 'page2', <DesktopOutlined />),
-    getItem('User', 'page3', <UserOutlined />, [
-        getItem('Tom', '3'),
-        getItem('Bill', '4'),
-        getItem('Alex', '5'),
+    getItem('Option 1', '/page1', <PieChartOutlined />),
+    getItem('Option 2', '/page2', <DesktopOutlined />),
+    getItem('User', '/page3', <UserOutlined />, [
+        getItem('Tom', '/page301'),
+        getItem('Bill', '/page302'),
+        getItem('Alex', '/page303'),
     ]),
     getItem('Team', 'page4', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
     getItem('Files', '9', <FileOutlined />),
@@ -49,10 +49,13 @@ const Comp:React.FC=()=>{
         console.log(keys)
         setOpenKeys([keys[keys.length-1]])
     }
+    // 路由
+    const currentRoute=useLocation()
+    console.log(currentRoute.pathname)
     return (
         <Menu 
         theme="dark" 
-        defaultSelectedKeys={['page1']} 
+        defaultSelectedKeys={[currentRoute.pathname]} 
         mode="inline" 
         items={items} 
         onClick={menuClick} 
