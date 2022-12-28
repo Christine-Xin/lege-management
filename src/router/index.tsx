@@ -4,6 +4,7 @@ import Home from '../views/Home'
 import {Navigate} from 'react-router-dom'
 // 路由懒加载
 import React,{lazy} from 'react'
+import Login from '../views/Login/index'
 const About = lazy(()=>import("../views/About"))
 const Page1 = lazy(()=>import("../views/Page1"))
 const Page2 = lazy(()=>import('../views/Page2'))
@@ -43,6 +44,10 @@ const baseRouter=[
     //     // element:<About/>
     //     element:withLoadingComponent(<About/>)
     // },
+    {
+        path:'/login',
+        element:<Login/>
+    },
     {
         path:'*',
         element:<Navigate to="/page1"/>
