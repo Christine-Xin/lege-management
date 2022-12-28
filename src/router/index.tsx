@@ -5,6 +5,8 @@ import {Navigate} from 'react-router-dom'
 // 路由懒加载
 import React,{lazy} from 'react'
 const About = lazy(()=>import("../views/About"))
+const Page1 = lazy(()=>import("../views/Page1"))
+const Page2 = lazy(()=>import('../views/Page2'))
 
 const withLoadingComponent=(comp:JSX.Element)=>(
     <React.Suspense fallback={<div>Loading...</div>}>
@@ -19,12 +21,23 @@ const baseRouter=[
     },
     {
         path:"/home",
-        element:<Home/>
+        element:<Home/>,
+        children:[
+            {
+                path:'page1',
+                element:withLoadingComponent(<Page1/>)
+            },
+            {
+                path:'page2',
+                element:withLoadingComponent(<Page2/>)
+            }
+        ]
     },
-    {
-        path:"/about",
-        // element:<About/>
-        element:withLoadingComponent(<About/>)
-    }
+    // {
+    //     path:"/about",
+    //     // element:<About/>
+    //     element:withLoadingComponent(<About/>)
+    // },
+    
 ]
 export default baseRouter
