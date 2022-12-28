@@ -35,8 +35,26 @@ const items:MenuItem[]=[
     getItem('Files', '9', <FileOutlined />),
     ]
 const Comp:React.FC=()=>{
-    
-    const [openKeys, setOpenKeys]=useState([''])
+        // 路由
+        const currentRoute=useLocation()
+        console.log(currentRoute.pathname)
+    /***
+     * 设置当前展开的菜单项
+     * 将currentRoute.pathname跟items数组得每一项children得key值进行对比，如果相等，就要上一级得key ,将key给到openkeys
+     */
+    let firstOpenKey:string=""
+
+    function findKey(obj:{key:string}){
+        return obj.key===currentRoute.pathname
+    }    
+   for(let i=0;i<items.length;i++){
+    if(items[i]!['children'] && items[i]!['children'].length && items[i]!['children'].find(findKey)){
+        firstOpenKey = items[i]!.key as string;
+        break;
+    }
+   }
+
+    const [openKeys, setOpenKeys]=useState([firstOpenKey])
     const nativeTo=useNavigate()
 
 
@@ -49,9 +67,7 @@ const Comp:React.FC=()=>{
         console.log(keys)
         setOpenKeys([keys[keys.length-1]])
     }
-    // 路由
-    const currentRoute=useLocation()
-    console.log(currentRoute.pathname)
+
     return (
         <Menu 
         theme="dark" 

@@ -11,6 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext", // 指定要使用的模块化的规范
     "moduleResolution": "Node",
+    "suppressImplicitAnyIndexErrors": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true, // 不生成编译后的文件
