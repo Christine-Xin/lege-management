@@ -1,7 +1,7 @@
 import {useSelector,useDispatch} from 'react-redux'
 const View =()=>{
     // 获取仓库数据
-    const {num}=useSelector((state)=>({
+    const {num}=useSelector((state:RootState)=>({
         num:state.num
     }))
     // 修改仓库数据
