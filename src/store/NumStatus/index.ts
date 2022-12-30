@@ -2,6 +2,7 @@ const store={
     state:{
         num:20
     },
+    // 只放同步的方法
     actions:{
         add(newState:{num:number},action:{type:string,val:number}){
             newState.num++
