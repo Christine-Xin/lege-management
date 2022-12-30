@@ -1,6 +1,12 @@
 import reducer from './reducer.ts'
-import {legacy_createStore} from 'redux'
+import {combineReducers, legacy_createStore} from 'redux'
+import handleNum from './NumStatus/reducer'
 
-const store = legacy_createStore(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const reducers=combineReducers({
+    handleNum,
+})
+
+// 创建数据仓库
+const store = legacy_createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 export default store;
