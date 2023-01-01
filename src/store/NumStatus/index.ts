@@ -11,6 +11,14 @@ const store={
             newState.num+=action.val
         }
     },
+    // 放异步的方法
+    asyncActions:{
+        asyncAdd2(dispatch:Function){
+            setTimeout(()=>{
+                dispatch({type:"add2",val:10})
+            },1000)
+        }
+    },
 //    actionNames:{
 //     add:"add",
 //     add2:"add2",
